@@ -1,0 +1,206 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-datatable/paper-datatable.html">
+<link rel="import" href="../bower_components/paper-datatable/paper-datatable-column.html">
+<link rel="import" href="../bower_components/paper-datatable/paper-datatable-card.html">
+<link rel="import" href="../bower_components/paper-datatable/paper-datatable-edit-dialog.html">
+<link rel="import" href="../bower_components/paper-datatable/paper-datatable-styles.html">
+<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-inout/paper-input.html">
+<link rel="import" href="../bower_components/countdown-timer/index.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icon/set-svg/iron-iconset-svg.html">
+
+<dom-module id="my-agenda">
+
+
+
+  <template>
+
+<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+<script>
+  window.Polymer = window.Polymer || {};
+  window.Polymer.dom = 'shadow';
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+    		<style is="custom-style">
+    			paper-card{
+    				display:table;
+    			}
+            paper-button.custom {
+              --paper-button-ink-color: var(--paper-pink-a200);
+              /* These could also be individually defined for each of the
+                specific css classes, but we'll just do it once as an example */
+              --paper-button-flat-keyboard-focus: {
+                background-color: var(--paper-pink-a200);
+                color: white !important;
+              };
+              --paper-button-raised-keyboard-focus: {
+                background-color: var(--paper-pink-a200) !important;
+                color: white !important;
+              };
+            }
+            paper-button.custom:hover {
+              background-color: var(--paper-indigo-100);
+            }
+            paper-button.pink {
+              color: var(--paper-pink-a200);
+
+            }
+            paper-button.indigo {
+              background-color: var(--paper-indigo-500);
+              color: white;
+              --paper-button-raised-keyboard-focus: {
+                background-color: var(--paper-pink-a200) !important;
+                color: white !important;
+              };
+            }
+            paper-button.green {
+              background-color: var(--paper-green-500);
+              color: white;
+            }
+            paper-button.green[active] {
+              background-color: var(--paper-red-500);
+            }
+            paper-button.disabled {
+              color: white;
+            }
+
+
+
+
+    		</style>
+
+
+
+
+    		<template is="dom-bind" id="app">
+
+
+    				<style is="custom-style">
+    					paper-card.color {
+
+    							font-family: 'Roboto', 'Noto', sans-serif;
+    							font-weight: normal;
+    							font-size: 20px;
+                  background-color:white; /* table  transparent */
+                  display:table;
+
+    					};
+
+              .containerContent {
+
+        box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+                    0  6px 30px 5px rgba(0, 0, 0, 0.12),
+                    0  8px 10px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    				</style>
+
+<br>
+<br>
+<div class="row" style="width:95%">
+<div class="col-md-2"> </div>
+<div class="col-md-8">
+
+    				<paper-card class="color containerContent" heading="Just a normal data table">
+    					<paper-datatable data="{{data}}" selectable multi-selection>
+    						<paper-datatable-column class="color1" header="Dessert (100g serving)" property="title" type="String" style="width:99%;" sortable></paper-datatable-column>
+    						<paper-datatable-column class="color" header="Calories" property="calories" type="Number" align="right" sortable tooltip="The total amount of food energy in the given serving size." sorted></paper-datatable-column>
+    						<paper-datatable-column header="Fat (g)" property="fat" type="Number" align="right" format-value="[[toFixedOne]]" sortable tooltip="The total amount of fat in the given serving size."></paper-datatable-column>
+    						<paper-datatable-column header="Carbs (g)" property="carbs" type="Number" align="right" sortable tooltip="The total amount of carbs in the given serving size."></paper-datatable-column>
+    						<paper-datatable-column header="Protein (g)" property="protein" type="Number" align="right" format-value="[[toFixedOne]]" sortable tooltip="The total amount of protein in the given serving size."></paper-datatable-column>
+    			  	</paper-datatable>
+    				</paper-card>
+</div>
+<div class="col-md-2"> <countdown-timer minutes="55" seconds="30"></countdown-timer> </div>
+
+</div>
+    		</template>
+<br>
+<br>
+     jgjjfhgfhg<iron-icon icon="msocial:poll"></iron-icon>
+<div class="row " style="width:95%">
+<div class="col-md-4"> </div>
+<div class="col-md-3 containerContent"><paper-input style="text-center height:30px" label="Employee ID"></paper-input> </div>
+<div class="col-md-3"> <paper-button toggles raised class="custom green">toggles</paper-button> </div>
+<div class="col-md-2"></div>
+</div>
+
+
+
+
+
+
+
+  </template>
+
+  <!-- Creates the element's prototype and registers it -->
+  <script>
+    Polymer({
+      is: 'my-agenda',
+      properties: {
+        route: Object
+      }
+
+
+
+    });
+    // Added from above for check
+
+
+
+    function _nativeSubmit(event) {
+      if (myform.validate()) {
+        // For each element the iron-form wants to submit, create a hidden
+        // input in the submission form.
+        var serializedItems = redirectDemo.serialize();
+        for (var name in serializedItems) {
+          var input = document.createElement('input');
+          input.hidden = true;
+          input.name = name;
+          input.value = serializedItems[name];
+          myform.appendChild(input);
+        }
+        myform.submit();
+      }
+    }
+    // Data script
+    var app = document.querySelector('#app');
+    app.data = [
+      {id: 0, title: 'Frozen yogurt', calories: 159, fat: 6, carbs: 24, protein: 4},
+      {id: 1, title: 'Ice cream sandwich', calories: 237, fat: 9, carbs: 37, protein: 4.3},
+      {id: 2, title: 'Eclair', calories: 262, fat: 16, carbs: 24, protein: 6},
+      {id: 3, title: 'Cupcake', calories: 305, fat: 3.7, carbs: 67, protein: 4.3},
+      {id: 4, title: 'Gingerbread', calories: 356, fat: 16, carbs: 49, protein: 3.9},
+      {id: 5, title: 'Jelly bean', calories: 373, fat: 0, carbs: 94, protein: 0}
+    ];
+    app.toFixedOne = function(value){
+      return value.toFixed(1);
+    };
+    app.toPercentage = function(value){
+      return Math.round(value * 10000)/100 + '%';
+    };
+
+
+  </script>
+
+</dom-module>

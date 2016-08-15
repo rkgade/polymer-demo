@@ -14,17 +14,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icon/set-svg/iron-iconset-svg.html">
 <link rel="import" href="my-icons.html">
 
 <dom-module id="my-app">
 
   <template>
-
+<!--  header color -->
     <style>
 
       :host {
@@ -47,18 +51,59 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .drawer-list a {
         display: block;
         padding: 0 16px;
-        line-height: 40px;
+        line-height: 60px;
         text-decoration: none;
-        color: var(--app-secondary-color);
+        color:  	white;
+        background-color: #312c32;
+        border-width: 1px;
+
+      }
+
+      .drawer-list a:hover {
+        display: block;
+        padding: 0 16px;
+        line-height: 60px;
+        text-decoration: none;
+        color:  	white;
+        background-color: #98dafc;
+      }
+      .content {
+        padding: 15px;
+        border: 1px solid #dedede;
+        border-top: none;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        @apply(--shadow-elevation-2dp);
       }
       .drawer-list a.iron-selected {
-        color: black;
-        font-weight: bold;
+        display: block;
+        padding: 0 16px;
+        line-height: 60px;
+        text-decoration: none;
+        color:  	white;
+        background-color: #98dafc;
+        color:#312c32;
+          border-width: 1px;
+        border-left: 6px solid #f44336;
       }
       .drawer-list a.subroute {
         padding-left: 32px;
       }
 
+      /*layout background color orange: #ff9800 #FFFFFF*/
+      app-drawer-layout.layout-color{
+        background-color: #FFFFFF;
+      /*  background-image: url("../images/blue.jpg"); */
+
+
+      }
+
+      .containerContent {
+
+box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+            0  6px 30px 5px rgba(0, 0, 0, 0.12),
+            0  8px 10px -5px rgba(0, 0, 0, 0.4);
+}
 
     </style>
 
@@ -69,37 +114,61 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
 
-    <app-drawer-layout fullbleed>
+    <app-drawer-layout class="layout-color" fullbleed>
 
       <!-- Drawer content -->
-      <app-drawer>
-        <app-toolbar>Menu</app-toolbar>
+      <app-drawer class="color2 containerContent">
+
+        <app-toolbar class="color3" style="font-size:40px; height:64px; color:#ffeb3b ">IBM</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
+          <a name="agenda" href="/agenda"> Agenda <a>
+
+          <a name="topics" href="/topics">Topics </a>
+          <a name="speakers" href="/speakers"> Speakers </a>
+          <a name="workshop" href="/workshop"> Workshop </a>
+          <a name="archcorner" href="/archcorner"> Architect Connect </a>
+          <a name="quiz" href="/quiz" > Quiz </a>
+          <a name="certifications" href="/certifications"> Certifications </a>
+          <a name="contacts" href="/contacts"> Contacts </a>
         </iron-selector>
       </app-drawer>
 
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
 
-        <app-header condenses reveals effects="waterfall">
+        <app-header condenses reveals style="height:93px"  effects="seamed">
           <app-toolbar>
-            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div title>My App</div>
+            <paper-icon-button icon="menu"  drawer-toggle></paper-icon-button>
+            <div style="font-size:30px; "title>DevConnect</div>
           </app-toolbar>
         </app-header>
 
         <iron-pages role="main" selected="[[page]]" attr-for-selected="name">
+
+
+
+
+
           <my-view1 name="view1"></my-view1>
           <my-view2 name="view2"></my-view2>
           <my-view3 name="view3"></my-view3>
-        </iron-pages>
+          <my-new-view name="new-view"> </my-new-view>
 
+          <my-form name="form"> </my-form>
+
+          <my-agenda name="agenda"> </my-agenda>
+          <my-topics name="topics"> </my-topics>
+          <my-speakers name="speakers"> </my-speakers>
+          <my-workshop name="workshop"> </my-workshop>
+          <my-archcorner name="archcorner"> </my-archcorner>
+          <my-quiz name="quiz"> </my-quiz>
+          <my-certifications name="certifications"> </my-certifications>
+          <my-contacts name="contacts"> </my-contacts>
+        </iron-pages>
       </app-header-layout>
 
     </app-drawer-layout>
+
 
   </template>
 
@@ -124,7 +193,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ],
 
       _routePageChanged: function(page) {
-        this.page = page || 'view1';
+        this.page = page || 'agenda';
       },
 
       _pageChanged: function(page) {
